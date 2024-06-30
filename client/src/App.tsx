@@ -29,7 +29,17 @@ function App() {
   };
 
   const verifyData = async () => {
-    throw new Error("Not implemented");
+    const response = await fetch(`${API_URL}/verify`, {
+      method: "GET",
+    });
+    const { isValid, originalData } = await response.json();
+
+    if (isValid) {
+      alert("Data is valid and has not been tampered with.");
+    } else {
+      alert("Data has been tampered with!");
+      setData(originalData);
+    }
   };
 
   return (
